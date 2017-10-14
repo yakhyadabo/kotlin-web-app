@@ -1,0 +1,5 @@
+== Kotlin Jooby Gradle 
+
+== Links 
+Install Kotlin : https://kotlinlang.org/docs/tutorials/command-line.html
+Install Gradle: https://gradle.org/install/
