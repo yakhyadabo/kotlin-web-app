@@ -1,0 +1,31 @@
+group 'org.yakhya.project'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '1.1.4'
+    ext.junit_version = '4.11'
+    ext.jooq_version = '3.7.4'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jooq:jooq-codegen:$jooq_version"
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url "http://repository.jetbrains.com/all"}
+}
+
+apply plugin: 'kotlin'
+
+dependencies {
+    compile "org.jooq:jooq:$jooq_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    testCompile  "junit:junit:$junit_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+}
