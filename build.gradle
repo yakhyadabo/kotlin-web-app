@@ -3,6 +3,7 @@ version '1.0-SNAPSHOT'
 
 buildscript {
     ext.kotlin_version = '1.1.4'
+    ext.junit_version = '4.11'
 
     repositories {
         mavenCentral()
@@ -13,17 +14,24 @@ buildscript {
     }
 }
 
-repositories {
-    mavenCentral()
-    maven {
-        url "http://repository.jetbrains.com/all"
+subprojects {
+    //Add common configuration here
+
+    apply plugin: 'kotlin'
+    group = 'org.yakhya.project'
+    version = '1.0-SNAPSHOT'
+    repositories {
+        mavenCentral()
+        maven { url "http://repository.jetbrains.com/all"}
+    }
+    dependencies {
+        compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     }
 }
 
-apply plugin: 'kotlin'
-
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    testCompile  'junit:junit:4.11'
-    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+// project dependencies.
+project(':kotlin-repository') {
+    dependencies {
+        compile project(':kotlin-domain')
+    }
 }
