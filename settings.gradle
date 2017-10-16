@@ -2,3 +2,4 @@ rootProject.name = 'kotlin-jooby'
 
 include 'kotlin-domain'
 include 'kotlin-repository'
+include 'kotlin-backend'
