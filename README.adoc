@@ -1,9 +1,14 @@
 == Kotlin Jooby Gradle 
 
 == Links
-*Install Kotlin :* +
+=== Install Kotlin
 https://kotlinlang.org/docs/tutorials/command-line.html
 
-*Install Gradle :* +
+=== Install Gradle
 https://gradle.org/install/
 
+=== Dependency Injection
+ TODO
+
+=== Unit Testing
+TODO
