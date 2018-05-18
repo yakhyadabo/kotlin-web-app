@@ -13,7 +13,6 @@ class UserRepository {
   fun findUser(id: Int):User{
     return dsl.select(a.ID, a.LOGIN, a.PASSWORD)
         .from(a)
-        .join(b).on(a.ID.eq(b.IRIS_USER_ID))
         .where(a.ID.equal(id))
         .fetchOneInto(User::class.java)
 
