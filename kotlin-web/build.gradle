@@ -26,6 +26,7 @@ repositories {
   mavenCentral()
 }
 
+
 apply plugin: "io.spring.dependency-management"
 apply plugin: "com.google.osdetector"
 apply plugin: "kotlin"
