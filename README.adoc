@@ -7,8 +7,10 @@ https://kotlinlang.org/docs/tutorials/command-line.html
 === Install Gradle
 https://gradle.org/install/
 
+=== JOOQ ORM
+
 === Dependency Injection
  TODO
 
 === Unit Testing
-TODO
+ TODO
