@@ -1,11 +1,9 @@
 package org.yakhya.project.kotlin.repository.impl
 
-import org.jooq.SQLDialect
 import org.jooq.impl.DSL
 import org.yakhya.project.kotlin.domain.User
 import org.yakhya.project.kotlin.repository.Tables
 import org.yakhya.project.kotlin.repository.UserRepository
-import java.sql.DriverManager
 
 
 class UserRepositoryImpl: UserRepository {
