@@ -11,6 +11,9 @@ https://gradle.org/install/
 
 === Dependency Injection
  TODO
+ // https://jooby.org/doc/lang-kotlin/
+ // https://jooby.org/doc/#modules-creating-modules
+
 
 === Unit Testing
  TODO
