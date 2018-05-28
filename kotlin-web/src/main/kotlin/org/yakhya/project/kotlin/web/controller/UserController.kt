@@ -6,6 +6,7 @@ import org.jooby.mvc.Path
 import org.yakhya.project.kotlin.domain.User
 import org.yakhya.project.kotlin.repository.UserRepository
 import javax.inject.Inject
+import javax.inject.Named
 
 @Path("/api")
 class UserController @Inject constructor(private val userRepository: UserRepository, val req: Request) {
@@ -13,19 +14,16 @@ class UserController @Inject constructor(private val userRepository: UserReposit
   @GET
   @Path("/users")
   fun list(): List<User> {
-
-    //val name = param("name").value("Kotlin")
-    // "Hello $name!"
     return userRepository.all()
   }
 
-/*
   @GET
   @Path("/user")
-  fun get(val name: JvmName): User {
-    // val name = req. param("name").value
-    // Get a user by it's ID
+  fun get(@Named("id") userId: Int): User {
+    return userRepository.findUser(userId)
   }
-*/
+
+
+
 
 }
