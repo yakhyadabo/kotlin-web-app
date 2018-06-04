@@ -10,10 +10,11 @@ https://gradle.org/install/
 === JOOQ ORM
 
 === Dependency Injection
- TODO
+https://medium.com/@espina.edgar/kotlin-idioms-in-jooby-cf3c8655d4ee
  // https://jooby.org/doc/lang-kotlin/
- // https://jooby.org/doc/#modules-creating-modules
 
+=== Module
+ // https://jooby.org/doc/#modules-creating-modules
 
 === Unit Testing
  TODO
