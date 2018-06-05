@@ -4,6 +4,8 @@ import org.jooby.Err
 import org.jooby.Kooby
 import org.jooby.Status
 import org.jooby.require
+import org.jooby.Results
+import org.jooby.apitool.ApiTool
 import org.yakhya.project.kotlin.repository.UserRepository
 import org.yakhya.project.kotlin.web.module.UserModule
 
@@ -14,8 +16,17 @@ class UserController : Kooby({
 
   use (UserModule())
 
+  /** Export API to Swagger and RAML: */
+  use(ApiTool()
+      .filter { r -> r.pattern().startsWith("/api") }
+      .swagger()
+      .raml())
+
+  // Home page redirect to Swagger:
+  get { Results.redirect("/swagger") }
+
   /**
-   * Everything about your Pets.
+   * Everything about your Users.
    */
   path("/api/v1/user") {
     /**
@@ -40,9 +51,9 @@ class UserController : Kooby({
 
       val id = param("id")
 
-      val pet = userRepository.findUser(id.intValue()) ?: throw Err(Status.NOT_FOUND)
+      val user = userRepository.findUser(id.intValue()) ?: throw Err(Status.NOT_FOUND)
 
-      pet
+      user
     }
   }
 })
