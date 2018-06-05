@@ -4,6 +4,7 @@ import org.jooq.impl.DSL
 import org.yakhya.project.kotlin.domain.User
 import org.yakhya.project.kotlin.repository.Tables
 import org.yakhya.project.kotlin.repository.UserRepository
+import java.util.*
 
 
 class UserRepositoryImpl: UserRepository {
@@ -12,11 +13,11 @@ class UserRepositoryImpl: UserRepository {
   private val a = Tables.IRIS_USER!!
   private val b = Tables.USER_PROFILE!!
 
-  override fun findUser(id: Int):User{
+  override fun findUser(id: Int):Optional<User>{
     return dsl.select(a.ID, a.LOGIN, a.PASSWORD)
         .from(a)
         .where(a.ID.equal(id))
-        .fetchOneInto(User::class.java)
+        .fetchOptionalInto(User::class.java)
 
   }
 
