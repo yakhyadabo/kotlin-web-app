@@ -8,10 +8,10 @@ import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.it
 import org.jooby.Status
-import org.yakhya.project.kotlin.web.controller.PetController
+import org.yakhya.project.kotlin.web.controller.UserController
 
 object AppTest : Spek({
-  jooby(PetController()) {
+  jooby(UserController()) {
     describe("Get /") {
       given("queryParameter name=Victor") {
         it("should return Hello Victor!") {

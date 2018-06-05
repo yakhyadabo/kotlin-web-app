@@ -1,39 +1,48 @@
 package org.yakhya.project.kotlin.web.controller
 
-import org.jooby.Request
-import org.jooby.Result
-import org.jooby.Results
-import org.jooby.mvc.GET
-import org.jooby.mvc.POST
-import org.jooby.mvc.Path
-import org.yakhya.project.kotlin.domain.User
+import org.jooby.Err
+import org.jooby.Kooby
+import org.jooby.Status
+import org.jooby.require
 import org.yakhya.project.kotlin.repository.UserRepository
-import javax.inject.Inject
-import javax.inject.Named
+import org.yakhya.project.kotlin.web.module.UserModule
 
-@Path("/api/v1")
-class UserController @Inject constructor(private val userRepository: UserRepository, val req: Request) {
+// See: https://github.com/jooby-project/apitool-kotlin-starter/blob/master/src/main/kotlin/starter/apitool/App.kt
+// See: https://dev.to/edgarespina/jooby-export-your-javakotlin-api-to-swaggerraml-45g9
 
-  @GET
-  @Path("/users")
-  fun list(): List<User> {
-    return userRepository.all()
+class UserController : Kooby({
+
+  use (UserModule())
+
+  /**
+   * Everything about your Pets.
+   */
+  path("/api/v1/user") {
+    /**
+     * List users ordered by id.
+     *
+     * @return Users.
+     */
+    get {
+      val userRepository = require(UserRepository::class)
+
+      userRepository.all()
+    }
+
+    /**
+     * Find user by ID
+     *
+     * @param id User ID.
+     * @return Returns `200` with a single user or `404`
+     */
+    get("/:id") {
+      val userRepository = require(UserRepository::class)
+
+      val id = param("id")
+
+      val pet = userRepository.findUser(id.intValue()) ?: throw Err(Status.NOT_FOUND)
+
+      pet
+    }
   }
-
-  @GET
-  @Path("/user")
-  fun get(@Named("id") userId: Int): User {
-    return userRepository.findUser(userId)
-  }
-
-
-  @POST
-  @Path("/user")
-  fun update(@Named("id") userId: Int): Result {
-    req.flash("success", "The item has been created")
-    return Results.json(userRepository.findUser(userId))
-
-  }
-
-
-}
+})
