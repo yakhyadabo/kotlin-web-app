@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+  swagger_ui:
+    image: swaggerapi/swagger-ui
+    volumes:
+      - ./swagger.yml:/usr/share/nginx/html/swagger.yml
+    environment:
+      - API_URL=/swagger.yml
+    restart: always
+    ports:
+      - "9090:8080"
