@@ -11,3 +11,9 @@ swagger:
 
 swagger-clean:
 	docker-compose -f docker-swagger-ui/compose.yml down -v --remove-orphans
+
+kong:
+	docker-compose -f docker-kong/compose.yml up
+
+kong-clean:
+	docker-compose -f docker-kong/compose.yml down -v --remove-orphans
