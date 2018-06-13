@@ -3,7 +3,7 @@ rootProject.name = 'kotlin-jooby'
 include 'kotlin-domain'
 include 'kotlin-repository'
 include 'kotlin-backend'
-include 'kotlin-web'
+include 'kotlin-web-jooby'
 include 'kotlin-web-ktor'
 include 'kotlin-db-migration'
 
