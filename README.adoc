@@ -1,4 +1,4 @@
-== Kotlin Jooby Gradle 
+== Kotlin Jooby Ktor Gradle
 
 == Links
 
@@ -10,6 +10,14 @@ https://kotlinlang.org/docs/tutorials/command-line.html
 
 === Install Gradle
 https://gradle.org/install/
+
+=== Ktor
+
+==== JWT Authentication
+
+https://ktor.io/features/authentication/jwt.html
+
+http://ktor.io/quickstart/guides/api.html#jwt-authentication
 
 === JOOQ ORM
 
