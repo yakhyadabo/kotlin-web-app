@@ -22,3 +22,16 @@ https://medium.com/@espina.edgar/kotlin-idioms-in-jooby-cf3c8655d4ee
 
 === Unit Testing
  TODO
+
+=== Install HTTPie
+Ubuntu
+[source,shell]
+----
+$ sudo apt-get update
+$ sudo apt-get install httpie
+----
+Mac OS
+[source,shell]
+----
+$ brew install httpie
+----
