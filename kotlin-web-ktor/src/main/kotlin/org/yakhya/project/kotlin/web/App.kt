@@ -17,7 +17,6 @@ import io.ktor.features.ContentNegotiation
 import io.ktor.features.DefaultHeaders
 import io.ktor.gson.gson
 import io.ktor.http.HttpStatusCode
-import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.get
 import io.ktor.routing.post
@@ -26,7 +25,6 @@ import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import java.text.DateFormat
 import java.time.LocalDate
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 data class Model(val name: String, val items: List<Item>, val date: LocalDate = LocalDate.of(2018, 4, 13))
@@ -52,12 +50,12 @@ fun Application.module() {
 
     routing {
 
-            install(Authentication) {
+      val jwt = SimpleJWT("my-super-secret-for-jwt")
+      install(Authentication) {
         jwt {
-          verifier(jwkProvider, jwkIssuer)
-          realm = jwkRealm
-          validate { credentials ->
-            if (credentials.payload.audience.contains("jwt-audience")) JWTPrincipal(credentials.payload) else null
+          verifier(jwt.verifier)
+          validate {
+            UserIdPrincipal(it.payload.getClaim("name").asString())
           }
         }
       }
@@ -67,7 +65,7 @@ fun Application.module() {
         get("/v1") {
           call.respond(model)
         }
-
+      }
         get("/v1/item/{key}") {
           val item = model.items.firstOrNull { it.key == call.parameters["key"] }
           if (item == null)
@@ -81,14 +79,12 @@ fun Application.module() {
         snippets += Snippet(post.snippet.text)*/
           call.respond(mapOf("OK" to true))
         }
-      }
     }
 
 }
 
-val jwkIssuer = "https://jwt-provider-domain/"
-val jwkRealm = "ktor jwt auth test"
-val jwkProvider = JwkProviderBuilder(jwkIssuer)
-    .cached(10, 24, TimeUnit.HOURS)
-    .rateLimited(10, 1, TimeUnit.MINUTES)
-    .build()
+open class SimpleJWT(secret: String) {
+  private val algorithm = Algorithm.HMAC256(secret)
+  val verifier = JWT.require(algorithm).build()
+  fun sign(name: String): String = JWT.create().withClaim("name", name).sign(algorithm)
+}
