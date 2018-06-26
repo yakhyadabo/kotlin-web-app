@@ -38,48 +38,51 @@ fun main(args: Array<String>) {
 
 fun Application.module() {
 
-    install(DefaultHeaders)
-    install(Compression)
-    install(CallLogging)
-    install(ContentNegotiation) {
-      gson {
-        setDateFormat(DateFormat.LONG)
-        setPrettyPrinting()
+  install(DefaultHeaders)
+  install(Compression)
+  install(CallLogging)
+  install(ContentNegotiation) {
+    gson {
+      setDateFormat(DateFormat.LONG)
+      setPrettyPrinting()
+    }
+  }
+
+  routing {
+
+    val jwt = SimpleJWT("my-super-secret-for-jwt")
+    install(Authentication) {
+      jwt {
+        verifier(jwt.verifier)
+        validate {
+          UserIdPrincipal(it.payload.getClaim("name").asString())
+        }
       }
     }
 
-    routing {
+    authenticate {
 
-      val jwt = SimpleJWT("my-super-secret-for-jwt")
-      install(Authentication) {
-        jwt {
-          verifier(jwt.verifier)
-          validate {
-            UserIdPrincipal(it.payload.getClaim("name").asString())
-          }
-        }
+      get("/v1") {
+        call.respond(model)
       }
-
-      authenticate {
-
-        get("/v1") {
-          call.respond(model)
-        }
-      }
-        get("/v1/item/{key}") {
-          val item = model.items.firstOrNull { it.key == call.parameters["key"] }
-          if (item == null)
-            call.respond(HttpStatusCode.NotFound)
-          else
-            call.respond(item)
-        }
-
-        post("/v1/user") {
-          /*        val post = call.receive<PostSnippet>()
-        snippets += Snippet(post.snippet.text)*/
-          call.respond(mapOf("OK" to true))
-        }
     }
+
+    get("/v1/item/{key}") {
+      val item = model.items.firstOrNull { it.key == call.parameters["key"] }
+      if (item == null)
+        call.respond(HttpStatusCode.NotFound)
+      else
+        call.respond(item)
+    }
+
+
+    post("/v1/user") {
+      /*        val post = call.receive<PostSnippet>()
+    snippets += Snippet(post.snippet.text)*/
+      call.respond(mapOf("OK" to true))
+    }
+
+  }
 
 }
 
