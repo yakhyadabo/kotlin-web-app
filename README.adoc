@@ -2,14 +2,21 @@
 
 == Links
 
-=== Jooby quick starter
-https://github.com/jooby-kickstart
 
 === Install Kotlin
 https://kotlinlang.org/docs/tutorials/command-line.html
 
 === Install Gradle
 https://gradle.org/install/
+
+=== Jooby quick starter
+
+==== Quick starter
+https://github.com/jooby-kickstart
+
+=== Dependency Injection
+https://medium.com/@espina.edgar/kotlin-idioms-in-jooby-cf3c8655d4ee
+ // https://jooby.org/doc/lang-kotlin/
 
 === Ktor
 
@@ -19,11 +26,11 @@ https://ktor.io/features/authentication/jwt.html
 
 http://ktor.io/quickstart/guides/api.html#jwt-authentication
 
+==== Dependency Injection
+
+
 === JOOQ ORM
 
-=== Dependency Injection
-https://medium.com/@espina.edgar/kotlin-idioms-in-jooby-cf3c8655d4ee
- // https://jooby.org/doc/lang-kotlin/
 
 === Module
  // https://jooby.org/doc/#modules-creating-modules
@@ -43,3 +50,6 @@ Mac OS
 ----
 $ brew install httpie
 ----
+
+=== Kong
+https://blog.codecentric.de/en/2017/11/api-management-kong/
