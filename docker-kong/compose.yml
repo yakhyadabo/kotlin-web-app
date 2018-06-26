@@ -66,6 +66,7 @@ services:
 
   kong:
     build: kong/
+    restart: on-failure
     depends_on:
       kong-database:
         condition: service_healthy
@@ -85,3 +86,14 @@ services:
       test: ["CMD-SHELL", "curl -I -s -L http://127.0.0.1:8000 || exit 1"]
       interval: 5s
       retries: 10
+
+  dashboard:
+    image: pgbi/kong-dashboard
+    depends_on:
+      kong:
+        condition: service_healthy
+    links:
+      - kong:kong
+    ports:
+      - 9090:8080
+    command: start --kong-url http://kong:8001
